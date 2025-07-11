@@ -2,7 +2,7 @@ name: Daily Commit
 
 on:
   schedule:
-    - cron: '0 2 * * *'  # Waktu UTC, berarti jam 09:00 WIB tiap hari
+    - cron: '0 2 * * *'  # Jam 09:00 WIB (karena GitHub pakai UTC)
   workflow_dispatch:     # Bisa dijalankan manual juga
 
 jobs:
@@ -15,11 +15,13 @@ jobs:
       - name: Setup Git
         run: |
           git config user.name "Aphexya"
-          git config user.email "ahmadafhaassalamiii.com"
+          git config user.email "ahmadafhaassalamiii.com"  # ganti jika perlu
 
       - name: Make Daily Commit
         run: |
+          EMOJIS=("🔥" "✨" "📅" "✅" "🚀" "📌" "😎" "🧠" "🕒")
+          CHOSEN=${EMOJIS[$RANDOM % ${#EMOJIS[@]}]}
           echo "Daily commit at $(date)" >> commit.log
           git add commit.log
-          git commit -m "🗓️ Daily commit: $(date)"
+          git commit -m "$CHOSEN Daily commit: $(date)"
           git push
