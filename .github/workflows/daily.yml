@@ -1,0 +1,25 @@
+name: Daily Commit
+
+on:
+  schedule:
+    - cron: '0 2 * * *'  # Waktu UTC, berarti jam 09:00 WIB tiap hari
+  workflow_dispatch:     # Bisa dijalankan manual juga
+
+jobs:
+  commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Setup Git
+        run: |
+          git config user.name "Aphexya"
+          git config user.email "ahmadafhaassalamiii.com"
+
+      - name: Make Daily Commit
+        run: |
+          echo "Daily commit at $(date)" >> commit.log
+          git add commit.log
+          git commit -m "🗓️ Daily commit: $(date)"
+          git push
