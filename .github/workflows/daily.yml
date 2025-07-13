@@ -2,15 +2,15 @@ name: Daily Commit
 
 on:
   schedule:
-    - cron: '10 17 * * *'  # 00:10 WIB
-  workflow_dispatch:       # Bisa manual juga
+    - cron: '2 2 * * *'  # ⏰ 09:02 WIB setiap hari (karena GitHub pakai UTC)
+  workflow_dispatch:       # bisa dijalankan manual juga
 
 jobs:
   commit:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repo
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Setup Git Identity
@@ -18,11 +18,11 @@ jobs:
           git config user.name "Aphexya Bot"
           git config user.email "aphexya@users.noreply.github.com"
 
-      - name: Make Daily Update
+      - name: Append to daily.md
         run: |
-          echo "🗓️ Commit at $(TZ='Asia/Jakarta' date)" >> daily.md
+          echo "🗓️ Daily commit at $(TZ='Asia/Jakarta' date)" >> daily.md
 
-      - name: Commit and Push
+      - name: Commit and Push Changes
         run: |
           git add daily.md
           git commit -m "🕒 Daily commit at $(date '+%Y-%m-%d %H:%M:%S')"
