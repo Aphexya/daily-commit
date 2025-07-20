@@ -39,6 +39,8 @@ def commit_repository(yaml_data):
     origin.push()
 
 if __name__ == '__main__':
+    with open("log.txt", "a") as f:
+        f.write(f"Jalan pada {datetime.now()}\n")
     while True:
         sleep(86400) # Sleep for 24 hours
         for i in range(randint(1, 10)): # Randomly update the file 1-10 times to avoid you know having one color tracking
