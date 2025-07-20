@@ -41,8 +41,16 @@ def commit_repository(yaml_data):
 if __name__ == '__main__':
     with open("log.txt", "a") as f:
         f.write(f"Jalan pada {datetime.now()}\n")
+
+    # ⏱ Commit LANGSUNG SEKARANG saat program dijalankan
+    for i in range(randint(1, 10)):
+        updated_yaml_data = update_file_to_commit()
+        commit_repository(updated_yaml_data)
+
+    # 🔁 Lalu lanjut loop harian
     while True:
-        sleep(86400) # Sleep for 24 hours
-        for i in range(randint(1, 10)): # Randomly update the file 1-10 times to avoid you know having one color tracking
+        sleep(86400)  # Tunggu 24 jam
+        for i in range(randint(1, 10)):
             updated_yaml_data = update_file_to_commit()
             commit_repository(updated_yaml_data)
+
